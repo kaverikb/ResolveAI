@@ -1,0 +1,23 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+
+# Environment variables - NEVER COMMIT THESE!
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node modules (if using npm)
+node_modules/
