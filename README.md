@@ -1,113 +1,114 @@
 # ResolveAI - Customer Support Chatbot
 
-An AI-powered customer support chatbot using FastAPI backend and Trinity API from OpenRouter.
+An intelligent customer support chatbot system built with FastAPI backend and the Trinity Large Thinking model from OpenRouter. The application features emotion detection and generates contextually appropriate, empathetic responses to customer queries.
 
-## Features
-- ?? AI-powered responses using Trinity API
-- ?? Emotion detection and empathetic responses
-- ? Fast and lightweight
-- ?? Secure API key management with .env
-- ?? Clean, modern web interface
+## Overview
+
+ResolveAI is a full-stack web application that automates customer support interactions by analyzing customer sentiment and providing personalized responses. The system uses the Arcee AI Trinity Large Thinking model via OpenRouter's API to understand context and generate intelligent responses.
+
+## Technology Stack
+
+### Backend
+- FastAPI - REST API framework for Python
+- Uvicorn - ASGI web server
+- Pydantic - Data validation and settings management
+- Python-dotenv - Environment variable management
+- Requests - HTTP client library
+
+### Frontend
+- HTML5 - Markup structure
+- CSS3 - Styling and layout
+- JavaScript (Vanilla) - Client-side functionality
+- HTTP - Client-server communication
+
+### AI/ML
+- Arcee AI Trinity Large Thinking (via OpenRouter API)
+- Model: arcee-ai/trinity-large-thinking:free
+- Context window: 262K tokens
+- Max output: 80K tokens
+
+### Development Tools
+- Git - Version control
+- Python 3.8+ - Runtime environment
+- Virtual environments (venv) - Dependency isolation
 
 ## Project Structure
-
-\\\
 ResolveAI/
-+-- backend/
-¦   +-- main.py
-¦   +-- requirements.txt
-¦   +-- app/
-¦       +-- chat.py
-¦       +-- schemas/
-¦       ¦   +-- chat.py
-¦       +-- models/
-¦           +-- emotion_detector.py
-+-- frontend/
-¦   +-- index.html
-¦   +-- style.css
-¦   +-- script.js
-+-- ml_models/
-¦   +-- emotion_detector/
-¦       +-- model.py
-¦       +-- model_loader.py
-¦       +-- text_processor.py
-+-- .env.example
-+-- .env (local only)
-+-- .gitignore
-+-- README.md
-\\\
+- backend/
+  - main.py
+  - requirements.txt
+  - app/
+    - __init__.py
+    - chat.py
+    - schemas/
+      - __init__.py
+      - chat.py
+    - models/
+      - __init__.py
+      - emotion_detector.py
+- frontend/
+  - index.html
+  - style.css
+  - script.js
+- ml_models/
+  - emotion_detector/
+    - __init__.py
+    - model.py
+    - model_loader.py
+    - text_processor.py
+- .env
+- .gitignore
+- README.md
 
-## Setup
+## API Documentation
 
-### 1. Install Backend Dependencies
-\\\ash
-cd backend
-pip install -r requirements.txt
-\\\
+### Chat Endpoint
 
-### 2. Configure Environment Variables
-\\\ash
-cp .env.example .env
-# Edit .env and add your Trinity API key from OpenRouter
-OPENROUTER_API_KEY=your_actual_key_here
-\\\
+**Endpoint:** `POST /api/chat/message`
 
-### 3. Run Backend Server
-\\\ash
-cd backend
-python main.py
-\\\
-
-The API will run at \http://localhost:8000\
-
-### 4. Open Frontend
-Open \rontend/index.html\ in your browser
-
-## API Endpoints
-
-### POST /api/chat/message
-Send a message and get an emotionally-aware response
-
-**Request:**
-\\\json
+**Request Body:**
+```json
 {
   "message": "I'm frustrated with your service!"
 }
-\\\
+```
 
 **Response:**
-\\\json
+```json
 {
-  "response": "I understand your frustration. Let me help you resolve this issue...",
+  "response": "I understand your frustration. Let me help you resolve this issue.",
   "emotion": "frustration"
 }
-\\\
+```
 
-## Using Trinity API
+**Supported Emotions:**
+- anger
+- frustration
+- urgency
+- sadness
+- happiness
+- neutral
 
-Trinity API is used through OpenRouter for emotion detection and response generation.
 
-Get your API key from [OpenRouter.ai](https://openrouter.ai)
+## How It Works
 
-## Important Security Notes
+1. User sends a message through the web interface
+2. Frontend sends POST request to `/api/chat/message`
+3. Backend receives the message and sends it to Trinity API
+4. Trinity API analyzes the message for emotion and generates a response
+5. Backend parses the API response and extracts emotion and reply
+6. Frontend receives JSON response and displays it with emotion indicator
+7. Chat history is maintained in the UI during the session
 
-?? **Never commit .env to GitHub!**
-- \.env\ contains your API keys
-- \.gitignore\ already excludes it
-- Share \.env.example\ instead (without actual keys)
+## Features
 
-When sharing the project:
-1. Your friend gets the code from GitHub
-2. They copy \.env.example\ to \.env\
-3. They add their own OpenRouter Trinity API key
-4. Everything works without exposing secrets
+### Emotion Detection
+The system analyzes incoming messages to detect customer emotions:
+- Analyzes sentiment and context
+- Classifies emotions into six categories
+- Influences response tone and approach
 
-## Future Improvements
-- [ ] Conversation memory
-- [ ] Multi-user support with database
-- [ ] Advanced emotion detection models
-- [ ] Ticketing system integration
-- [ ] Conversation analytics
-
-## License
-MIT
+### Empathetic Responses
+- Generates contextually appropriate replies
+- Adapts tone based on detected emotion
+- Provides helpful and supportive messages
